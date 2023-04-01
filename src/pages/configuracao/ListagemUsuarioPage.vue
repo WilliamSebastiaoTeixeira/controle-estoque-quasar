@@ -10,6 +10,7 @@
         unelevated
         no-caps
         label="Novo usuário"
+        square
         @click="setEditarCadastrarUsuarioDialog(null)"
       />
     </div>
