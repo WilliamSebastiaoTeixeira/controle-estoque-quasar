@@ -17,7 +17,6 @@ export interface LoginResponse {
 
 export default class LoginService {
   async login(params: LoginRequest): Promise<LoginResponse> {
-    console.log(params)
     const { data } = await http.post('/login', params)
     return data
   }

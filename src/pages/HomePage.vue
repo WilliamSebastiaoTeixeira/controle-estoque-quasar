@@ -4,7 +4,7 @@
       class="q-gutter-sm"
       :class="$q.screen.width > 900 ? 'row': 'column'"
     >
-      <HomeCard
+      <CardGeneric
         v-for="(modulo, index) in modulos"
         :key="index"
         :modulo="modulo"
@@ -16,14 +16,13 @@
 </template>
 
 <script setup lang="ts">
-  import { useQuasar } from 'quasar'
   import { useRouter } from 'vue-router'
-  import HomeCard from 'components/home/HomeCard.vue'
+  import CardGeneric from '../components/generic/CardGeneric.vue'
 
   const modulos = [
   {
-    title: 'Entrada e Saída',
-    icon: 'las la-table',
+    title: 'Entrada e saída',
+    icon: 'las la-warehouse',
     available: true,
     route: '/app/controle',
   },
@@ -47,5 +46,4 @@ function onGoTo(route: string){
   router.push(route)
 }
 
-const $q = useQuasar()
 </script>

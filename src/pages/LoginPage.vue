@@ -1,7 +1,6 @@
 <template>
   <q-page
-    class="estoque-background"
-    padding
+    class="estoque-background q-pa-md"
   >
     <div
       class="estoque-border bg-white q-pa-lg column"
@@ -79,7 +78,7 @@ import { useRouter } from 'vue-router'
 import { useServices } from '../composables/useServices'
 import { useAuthenticationStore } from '../stores/authentication'
 
-import { LoginRequest } from 'src/services/LoginService'
+import { LoginRequest } from '../services/LoginService'
 
 const router = useRouter()
 const services = useServices()
@@ -107,10 +106,13 @@ const rules = computed(() => ({
 const v$ = useVuelidate(rules, form)
 
 async function onLogin() {
-  const data = await services.loginService.login(form)
-  auth.setToken(data.token)
-  auth.setUsuario(data.usuario)
-  router.push('/home')
+  try{
+    const data = await services.loginService.login(form)
+    auth.setUsuario(data.usuario)
+    auth.setToken(data.token)
+  } finally {
+    router.push('/home')
+  }
 }
 
 </script>

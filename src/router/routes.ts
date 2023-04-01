@@ -1,5 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
+import { ConfiguracaoRoutes } from './ConfiguracaoRoutes'
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -33,7 +35,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/app',
-    component: () => import('src/layouts/MainLayout.vue'),
+    component: () => import('src/layouts/CheckLayout.vue'),
     children: [
       {
         path: '',
@@ -47,10 +49,7 @@ const routes: RouteRecordRaw[] = [
         path: 'produto',
         component: () => import('src/pages/produto/DashboardProdutosPage.vue')
       },
-      {
-        path: 'configuracao',
-        component: () => import('src/pages/configuracao/ConfiguracaoUsuarioPage.vue')
-      },
+      ...ConfiguracaoRoutes
     ]
   },
   {
