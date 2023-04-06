@@ -11,7 +11,7 @@
         </q-toolbar-title>
 
         <div class="q-gutter-x-sm">
-          <q-avatar class="cursor-pointer" text-color="primary" icon="las la-user-cog">
+          <q-avatar class="cursor-pointer" text-color="primary" icon="las la-wrench">
             <MenuToolBar/>
           </q-avatar>
         </div>

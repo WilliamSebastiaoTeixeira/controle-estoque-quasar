@@ -10,7 +10,7 @@
         </q-toolbar-title>
 
         <div class="q-gutter-x-sm">
-          <q-avatar class="cursor-pointer" text-color="primary" icon="las la-user-cog">
+          <q-avatar class="cursor-pointer" text-color="primary" icon="fas fa-wrench">
             <q-menu fit square anchor="bottom left" self="top left">
               <q-item
                 clickable
