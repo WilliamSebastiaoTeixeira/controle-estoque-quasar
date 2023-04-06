@@ -26,7 +26,6 @@
           <q-item
             clickable
             active-class="text-grey-1 bg-secondary"
-            :class="{ 'q-mt-xl': index === 1 }"
             :to="children.route"
             :disable="children.disabled"
             class="text-white"
@@ -100,8 +99,15 @@ const menu = [
     disabled: false,
     children: [
       {
-        nome: 'Usuários',
+        nome: 'Meu perfil',
         icon: 'las la-user',
+        uri: '',
+        route: '/app/configuracao/meu-perfil',
+        disabled: false,
+      },
+      {
+        nome: 'Usuários',
+        icon: 'las la-users',
         uri: '',
         route: '/app/configuracao/usuarios',
         disabled: false,

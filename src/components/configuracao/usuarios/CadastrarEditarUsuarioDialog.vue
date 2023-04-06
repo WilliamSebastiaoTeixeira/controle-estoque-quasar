@@ -6,7 +6,7 @@
   >
     <q-card
       square
-      style="width: 100%;  max-width: 600x;"
+      style="width: 100%;  max-width: 600px;"
     >
       <div>
         <q-card-section
@@ -70,6 +70,27 @@
               ]"
               v-model="form.email"
               no-error-icon
+            />
+          </div>
+          <div class="q-gutter-y-xs">
+            <span class="text-bold text-grey-8">Permissões</span>
+            <q-select
+              v-model="form.permissoes"
+              :options="permissoesOptions"
+              map-options
+              option-label="label"
+              option-value="value"
+              emit-value
+              multiple
+              outlined
+              dense
+              color="grey-8"
+              use-chips
+              :v="v$.permissao"
+              :rules="[
+                () => !v$.permissoes.required.$invalid ||
+                      'É necessário atribuir ao menos uma permissão ao usuário.',
+              ]"
             />
           </div>
 
@@ -168,7 +189,8 @@ import {
   ref,
   Ref,
   reactive,
-  computed
+  computed,
+  onMounted
 } from 'vue'
 import { useDialogPluginComponent } from 'quasar'
 import useVuelidate from '@vuelidate/core'
@@ -176,7 +198,7 @@ import { useQuasar } from 'quasar'
 import { required, requiredIf, sameAs, email, minLength } from '@vuelidate/validators'
 
 import { useServices } from '../../../composables/useServices'
-import { Usuario } from '../../../services/UsuarioService'
+import { Usuario, Permissoes } from '../../../services/UsuarioService'
 
 const props = defineProps({
   usuario: {
@@ -190,16 +212,17 @@ const { dialogRef, onDialogOK, onDialogHide } = useDialogPluginComponent()
 const services = useServices()
 const $q = useQuasar()
 
+const permissoesOptions = ref([]) as Ref<Permissoes[]>
 const mostrarSenha = ref(false) as Ref<boolean>
 const mostrarConfirmarSenha = ref(false) as Ref<boolean>
 const confirmarSenha = ref('') as Ref<string>
-
 const loading = ref(false) as Ref<boolean>
 
 const form: Usuario = reactive({
   nome: '',
   email: '',
-  senha: ''
+  senha: '',
+  permissoes: [],
 })
 
 const rules = computed(() => ({
@@ -208,6 +231,9 @@ const rules = computed(() => ({
   },
   email: {
     email,
+    required
+  },
+  permissoes: {
     required
   },
   senha: {
@@ -223,7 +249,7 @@ async function save() {
   try {
     loading.value = true
     if (props.usuario) {
-      const data = await services.usuarioService.UpdateUsuario(form)
+      const data = await services.usuarioService.updateUsuario(form)
       $q.notify({
         message: data.message,
         icon: 'fas fa-check-circle',
@@ -247,10 +273,19 @@ async function save() {
   }
 }
 
+async function setPermissoes(){
+  const data = await services.usuarioService.listPermissoes()
+  permissoesOptions.value = data
+}
+
 function setData(){
   if(!props.usuario) return
   Object.assign(form, props.usuario)
 }
 
 setData()
+
+onMounted(()=> {
+  setPermissoes()
+})
 </script>

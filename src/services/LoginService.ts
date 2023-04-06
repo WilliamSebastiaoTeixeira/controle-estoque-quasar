@@ -6,8 +6,10 @@ export interface LoginRequest {
 }
 
 export interface Usuario {
-  _id: string,
+  _id?: string
   nome: string
+  email: string
+  permissoes: string[]
 }
 
 export interface LoginResponse {
