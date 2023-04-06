@@ -1,6 +1,6 @@
 <template>
   <q-list
-    v-for="(item, index) in menu"
+    v-for="(item, index) in menuComputed"
     :key="index" padding
   >
     <q-expansion-item
@@ -48,13 +48,32 @@
 </template>
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import { onMounted, computed, ComputedRef } from 'vue'
+
+import { useServices } from '../../composables/useServices'
+import { useAuthenticationStore } from '../../stores/authentication'
+
+const auth = useAuthenticationStore()
+const services = useServices()
+
 
 interface Children {
   nome: string
   icon: string
   uri: string
   route: string
+  requiredPermission: string[]
   disabled: boolean,
+}
+
+interface Father {
+  nome: string,
+  icon: string,
+  uri: string,
+  route: string,
+  disabled: boolean,
+  requiredPermission: string[]
+  children: Children[]
 }
 
 const props = defineProps({
@@ -66,13 +85,14 @@ const props = defineProps({
 
 const route = useRoute()
 
-const menu = [
+const menu: Father[] = [
   {
     nome: 'Home',
     icon: 'las la-home',
     uri: 'DASHBOARD',
     route: '/app/controle',
     disabled: false,
+    requiredPermission: ['SOLICITAR'],
     children: []
   },
   {
@@ -81,6 +101,7 @@ const menu = [
     uri: '',
     route: '/app/controle',
     disabled: false,
+    requiredPermission: ['SOLICITAR'],
     children: []
   },
   {
@@ -89,6 +110,7 @@ const menu = [
     uri: '',
     route: '/app/produto',
     disabled: false,
+    requiredPermission: ['PRODUTOS'],
     children: []
   },
   {
@@ -97,12 +119,14 @@ const menu = [
     uri: '',
     route: '',
     disabled: false,
+    requiredPermission: [],
     children: [
       {
         nome: 'Meu perfil',
         icon: 'las la-user',
         uri: '',
         route: '/app/configuracao/meu-perfil',
+        requiredPermission: ['MEU_PERFIL', 'ADMINISTRAR'],
         disabled: false,
       },
       {
@@ -110,11 +134,25 @@ const menu = [
         icon: 'las la-users',
         uri: '',
         route: '/app/configuracao/usuarios',
+        requiredPermission: ['ADMINISTRAR'],
         disabled: false,
       }
     ]
   },
 ]
+
+const menuComputed = computed(() => menu.map(father => {
+  const disabled = father.requiredPermission.length > 0 && !hasPermission(father.requiredPermission)
+  const children = father.children.map(child => ({
+    ...child,
+    disabled: child.requiredPermission.length > 0 && !hasPermission(child.requiredPermission),
+  }))
+  return { ...father, disabled, children }
+})) as ComputedRef<Father[]>
+
+function hasPermission(permissions: string[]): boolean {
+  return permissions.some(permission => auth.usuario?.permissoes.includes(permission))
+}
 
 function classExpand(index: number, itemChildren: Children[]){
   const marginTop = index === 1 ? 'q-mt-xl': ''
@@ -130,8 +168,14 @@ function activeClass(index: number, itemChildren: Children[]){
   }
   return index !== 0 ? 'text-grey-1 bg-secondary' : ''
 }
+
 function checkRoute(itemChildren: Children[]){
   if(!itemChildren.length) return false
   return itemChildren.some((child: Children) => route.fullPath.includes(child.route))
 }
+
+onMounted(async () => {
+  const data = await services.usuarioService.getMeuPerfil()
+  auth.setUsuario(data)
+})
 </script>
