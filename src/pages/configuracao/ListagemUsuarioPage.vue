@@ -14,9 +14,24 @@
         @click="setEditarCadastrarUsuarioDialog(null)"
       />
     </div>
+
+    <div class="row justify-start">
+      <q-input
+        v-model="textFilter"
+        square
+        outlined
+        dense
+        placeholder="Pesquise pelo usuario..."
+      >
+        <template v-slot:prepend>
+          <q-icon name="las la-search" />
+        </template>
+      </q-input>
+    </div>
+
     <div class="row">
       <TabelaListagemUsuario
-        :rows="usuarios"
+        :rows="filteredUsuarios"
         :loading="loading"
         @on-edit="onEditUsuario"
         @on-delete="onDeleteUsuario"
@@ -26,10 +41,10 @@
 </template>
 <script setup lang="ts">
 import { useQuasar } from 'quasar'
-import { ref, Ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 import { useServices } from '../../composables/useServices'
-import { Usuario } from '../../services/UsuarioService'
+import type { Usuario } from '../../services/UsuarioService'
 
 import EditarCadastrarUsuarioDialog from '../../components/configuracao/usuarios/CadastrarEditarUsuarioDialog.vue'
 import TabelaListagemUsuario from '../../components/configuracao/usuarios/TabelaListagemUsuario.vue'
@@ -38,8 +53,17 @@ import ConfirmationDialog from '../../components/generic/ConfirmationDialog.vue'
 const $q = useQuasar()
 const services = useServices()
 
-const loading = ref(false) as Ref<boolean>
-const usuarios = ref([]) as Ref<Usuario[]>
+const loading = ref(false)
+const textFilter = ref<string>()
+const usuarios = ref<Usuario[]>([])
+
+const filteredUsuarios = computed(() => {
+  return usuarios.value.filter((usuario: Usuario) => {
+    if(!textFilter.value) return usuario
+    return usuario.nome.includes(textFilter.value) ||
+           usuario.email.includes(textFilter.value)
+  })
+})
 
 function setEditarCadastrarUsuarioDialog(usuario: Usuario | null) {
   $q.dialog({
