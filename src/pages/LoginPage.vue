@@ -15,7 +15,6 @@
         <q-input
           v-model="form.email"
           outlined
-          square
           placeholder="Email"
           dense
           autocorrect="off"
@@ -30,7 +29,6 @@
         <q-input
           v-model="form.senha"
           outlined
-          square
           placeholder="Senha"
           :type="mostrarSenha ? 'text' : 'password'"
           dense
@@ -58,7 +56,6 @@
         <q-btn
           color="primary"
           label="Entrar"
-          square
           unelevated
           class="full-width"
           :disable="v$.$invalid"

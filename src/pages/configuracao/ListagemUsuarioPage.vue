@@ -10,7 +10,6 @@
         unelevated
         no-caps
         label="Novo usuário"
-        square
         @click="setEditarCadastrarUsuarioDialog(null)"
       />
     </div>
@@ -18,7 +17,6 @@
     <div class="row justify-start">
       <q-input
         v-model="textFilter"
-        square
         outlined
         dense
         placeholder="Pesquise pelo usuario..."
@@ -97,7 +95,6 @@ async function onDeleteUsuario(_id: string){
         message: data.message,
         icon: 'fas fa-check-circle',
         color: 'positive',
-        classes: 'estoque-square',
         timeout: 1200,
       })
     }finally{

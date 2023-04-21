@@ -11,7 +11,7 @@
 
         <div class="q-gutter-x-sm">
           <q-avatar class="cursor-pointer" text-color="primary" icon="fas fa-wrench">
-            <q-menu fit square anchor="bottom left" self="top left">
+            <q-menu fit anchor="bottom left" self="top left">
               <q-item
                 clickable
                 @click="onLogout"

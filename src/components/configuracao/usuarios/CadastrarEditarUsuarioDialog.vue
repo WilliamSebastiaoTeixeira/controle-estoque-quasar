@@ -5,7 +5,6 @@
     @hide="onDialogHide"
   >
     <q-card
-      square
       style="width: 100%;  max-width: 600px;"
     >
       <div>
@@ -162,7 +161,6 @@
           <q-btn
             v-close-popup
             no-caps
-            square
             flat
             class="text-blue-6"
           >
@@ -171,7 +169,6 @@
           <q-btn
             no-caps
             unelevated
-            square
             color="secondary"
             @click="save"
             :loading="loading"
@@ -254,7 +251,6 @@ async function save() {
         message: data.message,
         icon: 'fas fa-check-circle',
         color: 'positive',
-        classes: 'estoque-square',
         timeout: 1200,
       })
     } else {
@@ -263,7 +259,6 @@ async function save() {
         message: data.message,
         icon: 'fas fa-check-circle',
         color: 'positive',
-        classes: 'estoque-square',
         timeout: 1200,
       })
     }

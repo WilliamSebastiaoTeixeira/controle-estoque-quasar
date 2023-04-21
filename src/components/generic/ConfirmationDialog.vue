@@ -5,7 +5,6 @@
       @hide="onDialogHide"
     >
       <q-card
-        square
         :style="{
           width: '100%',
           maxWidth: maxWidth
@@ -54,7 +53,6 @@
           <q-btn
             v-close-popup
             no-caps
-            square
             flat
             class="text-blue-6"
           >
@@ -63,7 +61,6 @@
           <q-btn
             no-caps
             unelevated
-            square
             :color="confirmationColor"
             @click="onDialogOK"
           >

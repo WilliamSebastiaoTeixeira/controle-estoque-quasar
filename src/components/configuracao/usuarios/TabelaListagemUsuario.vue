@@ -8,7 +8,6 @@
     :hide-bottom="() => rows ? rows?.length > 0 : true"
     v-model:pagination="pagination"
     hide-pagination
-    square
     flat
   >
     <template #header="props">

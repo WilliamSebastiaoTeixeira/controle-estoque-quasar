@@ -28,7 +28,6 @@ http.interceptors.response.use(
         message: 'Nosso serviço está temporariamente indisponível.',
         position: 'bottom',
         type: 'negative',
-        classes: 'estoque-square',
       })
       return Promise.reject(error)
     }
@@ -43,7 +42,6 @@ http.interceptors.response.use(
         Notify.create({
           message: 'Um erro inesperado ocorreu. Tente novamente.',
           position: 'bottom',
-          classes: 'estoque-square',
           type: 'negative'
         })
         break
@@ -54,7 +52,6 @@ http.interceptors.response.use(
             error.response.data?.message ||
             'Um erro inesperado ocorreu. Tente novamente.',
           position: 'bottom',
-          classes: 'estoque-square',
           type: 'negative'
         })
         break
@@ -62,7 +59,6 @@ http.interceptors.response.use(
         Notify.create({
           message: 'Nosso serviço está temporariamente indisponível.',
           position: 'bottom',
-          classes: 'estoque-square',
           type: 'negative'
         })
         break
@@ -71,7 +67,6 @@ http.interceptors.response.use(
         Notify.create({
           message: error.response.data?.message || 'Você não tem permissão para realizar a ação solicitada',
           position: 'bottom',
-          classes: 'estoque-square',
           type: 'negative'
         })
         break

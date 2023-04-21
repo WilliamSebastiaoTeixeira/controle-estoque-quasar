@@ -1,7 +1,6 @@
 <template>
   <q-card
     v-if="modulo.available"
-    square
     flat
     class="estoque-border card"
     @click="() => modulo.available ? emit('onGoTo', modulo.route): null"
