@@ -4,6 +4,7 @@
     :key="index" padding
   >
     <q-expansion-item
+      v-if="!item.disabled"
       clickable
       :default-opened="checkRoute(item.children)"
       :hide-expand-icon="!item.children?.length"
@@ -24,6 +25,7 @@
           class="fit"
         >
           <q-item
+            v-if="!children.disabled"
             clickable
             active-class="text-grey-1 bg-secondary"
             :to="children.route"
@@ -55,7 +57,6 @@ import { useAuthenticationStore } from '../../stores/authentication'
 
 const auth = useAuthenticationStore()
 const services = useServices()
-
 
 interface Children {
   nome: string
@@ -90,9 +91,9 @@ const menu: Father[] = [
     nome: 'Home',
     icon: 'las la-home',
     uri: 'DASHBOARD',
-    route: '/app/controle',
+    route: '/app',
     disabled: false,
-    requiredPermission: ['SOLICITAR'],
+    requiredPermission: [],
     children: []
   },
   {
@@ -174,8 +175,12 @@ function checkRoute(itemChildren: Children[]){
   return itemChildren.some((child: Children) => route.fullPath.includes(child.route))
 }
 
-onMounted(async () => {
+async function setData(){
   const data = await services.usuarioService.getMeuPerfil()
   auth.setUsuario(data)
+}
+
+onMounted(async () => {
+  setData()
 })
 </script>

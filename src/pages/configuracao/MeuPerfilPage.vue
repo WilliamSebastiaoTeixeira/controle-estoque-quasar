@@ -251,12 +251,12 @@ async function setData(){
   const data = await services.usuarioService.getMeuPerfil()
   auth.setUsuario(data)
   Object.assign(form, data)
+  if(auth.usuario?.permissoes.includes('ADMINISTRAR')){
+    setPermissoes()
+  }
 }
 
 onMounted(()=> {
   setData()
-  if(auth.usuario?.permissoes.includes('ADMINISTRAR')){
-    setPermissoes()
-  }
 })
 </script>
