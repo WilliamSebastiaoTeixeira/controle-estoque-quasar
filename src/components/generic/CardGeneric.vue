@@ -2,7 +2,7 @@
   <q-card
     v-if="modulo.available"
     flat
-    class="estoque-border card"
+    class= "card"
     @click="() => modulo.available ? emit('onGoTo', modulo.route): null"
   >
     <div

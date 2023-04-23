@@ -3,7 +3,7 @@
     class="estoque-background q-pa-md"
   >
     <div
-      class="estoque-border bg-white q-pa-lg column"
+      class="bg-white q-pa-lg column"
       style="min-width: 200px; max-width: 400px; width: 100%;"
     >
       <div class="flex justify-start">

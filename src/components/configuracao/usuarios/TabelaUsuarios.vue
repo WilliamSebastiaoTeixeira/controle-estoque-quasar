@@ -1,7 +1,6 @@
 <template>
   <q-table
     style="width: 100%"
-    class="estoque-border"
     row-key="_id"
     :rows="rows"
     :columns="columns"
@@ -83,7 +82,7 @@
   </q-table>
 </template>
 <script setup lang="ts">
-import { QTableProps } from 'quasar'
+import type { QTableProps } from 'quasar'
 
 const pagination = { rowsPerPage: 0 }
 

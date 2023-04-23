@@ -2,15 +2,15 @@
   <q-page padding class="container q-gutter-y-md">
     <div class="row justify-between">
       <span class="text-bold text-primary estoque-h1">
-        Cadastro de usuarios
+        Cadastro de produtos
       </span>
 
       <q-btn
         color="secondary"
         unelevated
         no-caps
-        label="Novo usuário"
-        @click="setEditarCadastrarUsuarioDialog(null)"
+        label="Novo produto"
+        @click="setEditarCadastrarProdutoDialog(null)"
       />
     </div>
 
@@ -19,7 +19,7 @@
         v-model="textFilter"
         outlined
         dense
-        placeholder="Pesquise pelo usuario..."
+        placeholder="Pesquise pelo produto..."
       >
         <template v-slot:prepend>
           <q-icon name="las la-search" />
@@ -28,61 +28,63 @@
     </div>
 
     <div class="row">
-      <TabelaUsuarios
-        :rows="filteredUsuarios"
+      <TabelaProdutos
+        :rows="filteredProdutos"
         :loading="loading"
-        @on-edit="onEditUsuario"
-        @on-delete="onDeleteUsuario"
+        @on-edit="onEditProduto"
+        @on-delete="onDeleteProduto"
       />
     </div>
   </q-page>
 </template>
 <script setup lang="ts">
+import { ref, onMounted , computed} from 'vue'
 import { useQuasar } from 'quasar'
-import { ref, onMounted, computed } from 'vue'
 
 import { useServices } from '../../composables/useServices'
-import type { Usuario } from '../../services/UsuarioService'
+import type { Produto } from '../../services/ProdutosService'
 
-import EditarCadastrarUsuarioDialog from '../../components/configuracao/usuarios/CadastrarEditarUsuarioDialog.vue'
-import TabelaUsuarios from '../../components/configuracao/usuarios/TabelaUsuarios.vue'
+import TabelaProdutos from '../../components/produtos/TabelaProdutos.vue'
+import EditarCadastrarProdutoDialog from '../../components/produtos/EditarCadastrarProdutoDialog.vue'
 import ConfirmationDialog from '../../components/generic/ConfirmationDialog.vue'
 
 const $q = useQuasar()
 const services = useServices()
 
-const loading = ref(false)
+const produtos = ref<Produto[]>()
 const textFilter = ref<string>()
-const usuarios = ref<Usuario[]>([])
+const loading = ref(false)
 
-const filteredUsuarios = computed(() => {
-  return usuarios.value.filter((usuario: Usuario) => {
-    if(!textFilter.value) return usuario
-    return usuario.nome.includes(textFilter.value) ||
-           usuario.email.includes(textFilter.value)
+
+const filteredProdutos = computed(() => {
+  return produtos.value?.filter((produto: Produto) => {
+    if(!textFilter.value) return produto
+    return produto.nome.includes(textFilter.value) ||
+           produto.descricao.includes(textFilter.value)
   })
 })
 
-function setEditarCadastrarUsuarioDialog(usuario: Usuario | null) {
+
+function onEditProduto(produto: Produto){
+  setEditarCadastrarProdutoDialog(produto)
+}
+
+function setEditarCadastrarProdutoDialog(produto: Produto | null) {
   $q.dialog({
-    component: EditarCadastrarUsuarioDialog,
+    component: EditarCadastrarProdutoDialog,
     componentProps: {
-      usuario: usuario,
+      produto: produto,
     },
   }).onOk(()=>{
     load()
   })
 }
 
-function onEditUsuario(usuario: Usuario){
-  setEditarCadastrarUsuarioDialog(usuario)
-}
-
-async function onDeleteUsuario(_id: string){
+async function onDeleteProduto(_id: string){
   $q.dialog({
     component: ConfirmationDialog,
     componentProps: {
-      bodyText: 'Você tem certeza que deseja excluir o usuário?',
+      bodyText: 'Você tem certeza que deseja excluir o produto?',
       confirmationColor: 'negative',
       confirmationText: 'Excluir',
       maxWidth: '250px'
@@ -90,7 +92,7 @@ async function onDeleteUsuario(_id: string){
   }).onOk(async () => {
     try {
       loading.value = true
-      const data = await services.usuarioService.deleteUsuario(_id)
+      const data = await services.produtosService.deleteProduto(_id)
       $q.notify({
         message: data.message,
         icon: 'fas fa-check-circle',
@@ -104,17 +106,17 @@ async function onDeleteUsuario(_id: string){
   })
 }
 
-async function load() {
+
+async function load(){
   try {
     loading.value = true
-    const data = await services.usuarioService.listUsuarios()
-    usuarios.value = data
+    const data = await services.produtosService.listProdutos()
+    produtos.value = data
   }finally{
     loading.value = false
   }
 }
 
-onMounted(() => {
-  load()
-})
+onMounted(() => load())
 </script>
+

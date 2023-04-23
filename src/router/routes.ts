@@ -46,7 +46,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'produto',
-        component: () => import('src/pages/produto/DashboardProdutosPage.vue')
+        component: () => import('src/pages/produto/ListagemProdutosPage.vue')
       },
       ...ConfiguracaoRoutes
     ]

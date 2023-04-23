@@ -7,7 +7,7 @@
     </div>
     <div class="row justify-center">
       <q-card
-        class="estoque-border full-width"
+        class="full-width"
         flat
       >
         <div>
