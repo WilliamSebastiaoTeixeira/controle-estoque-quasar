@@ -64,7 +64,6 @@ const filteredProdutos = computed(() => {
   })
 })
 
-
 function onEditProduto(produto: Produto){
   setEditarCadastrarProdutoDialog(produto)
 }

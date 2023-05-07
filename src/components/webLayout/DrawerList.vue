@@ -100,10 +100,27 @@ const menu: Father[] = [
     nome: 'Entrada e saída',
     icon: 'las la-warehouse',
     uri: '',
-    route: '/app/controle',
+    route: '',
     disabled: false,
-    requiredPermission: ['SOLICITAR'],
-    children: []
+    requiredPermission: [],
+    children: [
+      {
+        nome: 'Dashboard de registros',
+        icon: 'dashboard',
+        uri: '',
+        route: '/app/registro/dashboard',
+        requiredPermission: ['ENTRADA_SAIDA'],
+        disabled: false,
+      },
+      {
+        nome: 'Registrar entrada',
+        icon: 'input',
+        uri: '',
+        route: '/app/registro/solicitacao',
+        requiredPermission: ['ENTRADA_SAIDA'],
+        disabled: false,
+      },
+    ]
   },
   {
     nome: 'Produtos',

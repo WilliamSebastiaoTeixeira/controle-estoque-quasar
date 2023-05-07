@@ -6,8 +6,9 @@
   "author": "William S. Teixeira <williamsebastiaoteixeira@gmail.com>",
   "private": true,
   "scripts": {
-    "start:dev": "quasar dev",
-    "lint": "eslint --ext .js,.ts,.vue ./"
+    "start:dev": "quasar dev --port 7600",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "build": "quasar build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -21,6 +22,7 @@
     "quasar": "^2.11.8",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
+    "vue3-qr-reader": "^1.0.0",
     "vuex": "4"
   },
   "devDependencies": {

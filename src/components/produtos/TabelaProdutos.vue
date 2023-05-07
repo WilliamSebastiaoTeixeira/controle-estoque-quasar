@@ -4,6 +4,7 @@
     row-key="_id"
     :rows="rows"
     :columns="columns"
+    wrap-cells
     :hide-bottom="() => rows ? rows?.length > 0 : true"
     v-model:pagination="pagination"
     hide-pagination
@@ -32,6 +33,14 @@
     </template>
 
     <template #body-cell-descricao="props">
+      <q-td :props="props">
+        <span>
+          {{ props.value }}
+        </span>
+      </q-td>
+    </template>
+
+    <template #body-cell-qtdEstoque="props">
       <q-td :props="props">
         <span>
           {{ props.value }}
@@ -115,6 +124,13 @@ const columns: QTableProps['columns'] = [
     align: 'left',
     field: (data :{ descricao: string }) => data.descricao
   },
+  {
+    name: 'qtdEstoque',
+    label: 'Qtd. Estoque',
+    align: 'left',
+    field: (data :{ qtdEstoque: number }) => data.qtdEstoque
+  },
+
   {
     name: 'qrcode',
     label: '',

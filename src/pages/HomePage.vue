@@ -24,7 +24,7 @@
     title: 'Entrada e saída',
     icon: 'las la-warehouse',
     available: true,
-    route: '/app/controle',
+    route: '/app/registro',
   },
   {
     title: 'Produtos',

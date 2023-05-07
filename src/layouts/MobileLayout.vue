@@ -45,7 +45,7 @@ const menu = [
     nome: 'Entrada e saída',
     icon: 'las la-warehouse',
     uri: '',
-    route: '/app/controle',
+    route: '/app/registro',
     size: '17px',
     disabled: false
   },

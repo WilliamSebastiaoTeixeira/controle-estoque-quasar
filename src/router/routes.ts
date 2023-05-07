@@ -38,11 +38,15 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        redirect: '/app/controle'
+        redirect: '/app/registro/dashboard'
       },
       {
-        path: 'controle',
-        component: () => import('src/pages/controle/DashboardControlePage.vue')
+        path: 'registro/dashboard',
+        component: () => import('src/pages/registro/DashboardRegistroPage.vue')
+      },
+      {
+        path: 'registro/solicitacao',
+        component: () => import('src/pages/registro/SolicitarRegistroPage.vue')
       },
       {
         path: 'produto',
