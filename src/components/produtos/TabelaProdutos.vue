@@ -40,7 +40,7 @@
       </q-td>
     </template>
 
-    <template #body-cell-qtdEstoque="props">
+    <template #body-cell-qtdUnidades="props">
       <q-td :props="props">
         <span>
           {{ props.value }}
@@ -125,10 +125,10 @@ const columns: QTableProps['columns'] = [
     field: (data :{ descricao: string }) => data.descricao
   },
   {
-    name: 'qtdEstoque',
+    name: 'qtdUnidades',
     label: 'Qtd. Estoque',
     align: 'left',
-    field: (data :{ qtdEstoque: number }) => data.qtdEstoque
+    field: (data :{ qtdUnidades: number }) => data.qtdUnidades
   },
 
   {

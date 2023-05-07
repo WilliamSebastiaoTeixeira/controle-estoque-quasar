@@ -120,7 +120,7 @@ const loading = ref(false) as Ref<boolean>
 
 const form: Produto = reactive({
   nome: '',
-  qtdEstoque: 0,
+  qtdUnidades: 0,
   descricao: '',
 })
 

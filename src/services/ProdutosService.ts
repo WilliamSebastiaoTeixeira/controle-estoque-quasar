@@ -3,7 +3,7 @@ import { http } from './index'
 export interface Produto {
   _id?: string
   nome: string
-  qtdEstoque: number
+  qtdUnidades: number
   descricao: string
 }
 
