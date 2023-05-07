@@ -45,7 +45,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/registro/DashboardRegistroPage.vue')
       },
       {
-        path: 'registro/solicitacao',
+        path: 'registro/entrada',
         component: () => import('src/pages/registro/SolicitarRegistroPage.vue')
       },
       {

@@ -116,7 +116,7 @@ const menu: Father[] = [
         nome: 'Registrar entrada',
         icon: 'input',
         uri: '',
-        route: '/app/registro/solicitacao',
+        route: '/app/registro/entrada',
         requiredPermission: ['ENTRADA_SAIDA'],
         disabled: false,
       },

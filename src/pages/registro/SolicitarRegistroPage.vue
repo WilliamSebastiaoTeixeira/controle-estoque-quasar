@@ -3,7 +3,7 @@
 
     <div class="row justify-between">
       <span class="text-bold text-primary estoque-h1">
-        Solicitar registro
+        Registrar entrada
       </span>
     </div>
 
