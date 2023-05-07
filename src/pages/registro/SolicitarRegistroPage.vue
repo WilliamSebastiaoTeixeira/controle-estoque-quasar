@@ -220,6 +220,7 @@
               color="secondary"
               @click="save"
               :loading="loading"
+              :disable="disable"
             >
               Registrar
             </q-btn>
@@ -230,13 +231,15 @@
  </q-page>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import { useServices } from '../../composables/useServices'
 
 import type { Produto } from '../../services/ProdutosService'
-import type { ProdutoUnidades } from '../../services/RegistrosService'
+import type { ProdutoUnidades, Unidade } from '../../services/RegistrosService'
 import type { QTableProps } from 'quasar'
 
 import InputSearchProdutos from '../../components/registros/InputSearchProdutos.vue'
@@ -278,12 +281,14 @@ const columns: QTableProps['columns'] = [
   },
 ]
 
-
+dayjs.extend(customParseFormat)
 const services = useServices()
 const $q = useQuasar()
 
 const loading = ref(false)
 const produtosSelecionados = ref<ProdutoLocal[]>([])
+
+const disable = computed(() => !produtosSelecionados.value.length)
 
 function onDelete(produto: Produto){
   const indexToDelete  = produtosSelecionados.value.findIndex(p => p._id === produto._id)
@@ -312,7 +317,17 @@ async function save(){
   const produtos = produtosSelecionados.value.map((produto: ProdutoLocal) => {
     return {
       produto: produto._id,
-      unidades: produto.unidades
+      unidades: produto.unidades.map((unidade: Unidade) => {
+
+        const data = unidade.dataValidade ?
+          dayjs(unidade.dataValidade, 'DD/MM/YYYY').toISOString() :
+          null
+
+        return {
+          dataValidade: data,
+          descricao: unidade.descricao
+        }
+      })
     }
   })
 

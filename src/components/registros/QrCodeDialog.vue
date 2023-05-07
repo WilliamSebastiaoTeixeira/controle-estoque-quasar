@@ -108,6 +108,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDialogPluginComponent } from 'quasar'
+import { useQuasar } from 'quasar'
 
 /* eslint-disable */
 //@ts-ignore
@@ -122,6 +123,7 @@ defineEmits(useDialogPluginComponent.emits)
 const { dialogRef, onDialogOK,onDialogHide } = useDialogPluginComponent()
 
 const service = useServices()
+const $q = useQuasar()
 
 const loading = ref(false)
 const produtos = ref<Produto[]>([])
@@ -135,6 +137,19 @@ function onDelete(produto: Produto){
 
 async function onDecode(_id: string){
   if(!_id) return
+
+  const jaExistente = produtos.value.some((p: Produto) => _id === p._id)
+  if(jaExistente) {
+    $q.notify({
+      message: 'Produto já inserido na listagem!',
+      icon: 'fas fa-check-circle',
+      color: 'negative',
+      timeout: 1200,
+    })
+
+    return
+  }
+
   try {
     loading.value = true
     const produto: Produto = await service.produtosService.getById(_id)

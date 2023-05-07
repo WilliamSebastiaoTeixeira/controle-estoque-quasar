@@ -80,16 +80,21 @@ function setQrCodeDialog(){
   }).onOk((produtosQrCode: Produto[]) => {
 
     const data = produtosQrCode.map((produto: Produto) => {
-        return {
-          ...produto,
-          unidades: [
-            {
-              dataValidade: '',
-              descricao: ''
-            }
-          ]
-        }
-      })
+      const jaExistente = props.modelValue.some((p: Produto) => produto._id === p._id)
+      if(jaExistente) {
+        return undefined
+      }
+
+      return {
+        ...produto,
+        unidades: [
+          {
+            dataValidade: '',
+            descricao: ''
+          }
+        ]
+      }
+    }).filter(((p) => p !== undefined))
 
     emit('update:modelValue', props.modelValue.concat(data))
   })
@@ -124,6 +129,20 @@ function selectProduto(produto: Produto){
       }
     ]
   }
+
+  const jaExistente = props.modelValue.some((p: Produto) => produto._id === p._id)
+  if(jaExistente) {
+    $q.notify({
+      message: 'Produto já inserido na listagem!',
+      icon: 'fas fa-check-circle',
+      color: 'negative',
+      timeout: 1200,
+    })
+
+    return
+  }
+
+  selected.value = null
 
   emit('update:modelValue', props.modelValue.concat(data))
 }

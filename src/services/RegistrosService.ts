@@ -1,7 +1,7 @@
 import { http } from './index'
 
 export interface Unidade {
-  dataValidade: string
+  dataValidade: string | null
   descricao: string
 }
 
