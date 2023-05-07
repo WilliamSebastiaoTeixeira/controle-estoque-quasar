@@ -340,6 +340,8 @@ async function save(){
       color: 'positive',
       timeout: 1200,
     })
+
+    produtosSelecionados.value = []
     loading.value = false
   }catch(e){
     loading.value = false
