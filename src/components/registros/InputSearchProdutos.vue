@@ -138,7 +138,7 @@ function selectProduto(produto: Produto){
 
   if(!props.entrada && !produto.qtdUnidades){
     $q.notify({
-      message: 'Produto não possui unidades cadastradas no sistema!',
+      message: 'Produto não possui unidades inseridas!',
       icon: 'fas fa-times-circle',
       color: 'negative',
       timeout: 1200,

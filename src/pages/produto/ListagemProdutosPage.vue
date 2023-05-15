@@ -33,6 +33,7 @@
         :loading="loading"
         @on-edit="onEditProduto"
         @on-delete="onDeleteProduto"
+        @load-unidades="onLoadUnidades"
       />
     </div>
   </q-page>
@@ -66,6 +67,16 @@ const filteredProdutos = computed(() => {
 
 function onEditProduto(produto: Produto){
   setEditarCadastrarProdutoDialog(produto)
+}
+
+async function onLoadUnidades(props: any){
+  try{
+    props.row.loading = true
+    props.row.unidades = await services.registroService.listUnidadesByProduto(props.row._id)
+    props.row.loading = false
+  }catch {
+    props.row.loading = false
+  }
 }
 
 function setEditarCadastrarProdutoDialog(produto: Produto | null) {

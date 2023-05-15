@@ -102,13 +102,13 @@ const columns: QTableProps['columns'] = [
   {
     name: 'editar',
     label: '',
-    align: 'right',
+    align: 'center',
     field: ''
   },
   {
     name: 'delete',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   }
 ]

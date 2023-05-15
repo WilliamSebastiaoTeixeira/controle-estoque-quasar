@@ -91,7 +91,7 @@
                       :class="props.expand ? 'rotate-180': ''"
                       style="transition: transform 0.3s;"
                       icon="keyboard_arrow_down"
-                      @click.stop="loadUnidades(props)"
+                      @click.stop="() => props.expand ? props.expand = false : loadUnidades(props)"
                     />
                   </div>
 
@@ -128,7 +128,7 @@
                   <div class="row" style="width: 100%">
                     <div
                       v-if="props.row.loading"
-                      class="column justify-center items-center"
+                      class="column justify-center items-center q-my-sm"
                       style="width: 100%"
                     >
                       <q-spinner-hourglass
@@ -247,19 +247,13 @@ const columns: QTableProps['columns'] = [
   {
     name: 'delete',
     label: '',
-    align: 'left',
-    field: ''
-  },
-  {
-    name: 'adicionarUnidade',
-    label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
   {
     name: 'expand',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
 ]
@@ -279,7 +273,7 @@ function formatDate(date: string){
 }
 
 async function loadUnidades(props: any){
-  props.expand = !props.expand
+  props.expand = true
 
   props.row.loading = true
   const data = await services.registroService.listUnidadesByProduto(props.row._id)
@@ -312,6 +306,9 @@ async function save(){
       color: 'positive',
       timeout: 1200,
     })
+
+    produtosSelecionados.value = []
+
     loading.value = false
   }catch(e){
     loading.value = false

@@ -112,7 +112,7 @@
                   transition-show="scale"
                   transition-hide="scale"
                 >
-                  Data de validade
+                  Validade
                 </q-tooltip>
               </q-btn>
 
@@ -186,7 +186,7 @@ const columns: QTableProps['columns'] = [
   {
     name: 'expand',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
 ]

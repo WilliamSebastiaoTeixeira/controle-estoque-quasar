@@ -37,7 +37,7 @@
               <q-icon
                 name="fas fa-box-open"
                 size="20px"
-                color="negative"
+                color="positive"
               />
             </span>
 
@@ -98,8 +98,8 @@
                   <div v-if="col.name === 'adicionarUnidade'">
                     <q-btn
                       unelevated
-                      round
-                      flat
+                      outline
+                      :label="props.row.unidades.length"
                       color="positive"
                       icon="add"
                       @click="onAddUnidade(props.row)"
@@ -142,6 +142,10 @@
                   >
                     <div class="row justify-between items-center q-gutter-x-sm no-wrap">
 
+                      <span class="text-grey-9 q-mx-md">
+                        {{ index + 1 }}
+                      </span>
+
                       <q-input
                         v-model="unidade.descricao"
                         style="width: 100%"
@@ -173,7 +177,7 @@
                                 <q-date
                                   v-model="unidade.dataValidade"
                                   mask="DD/MM/YYYY"
-                                  subtitle="Data de validade do produto"
+                                  subtitle="Validade do produto"
                                 />
                               </q-menu>
                             </q-btn>
@@ -267,19 +271,19 @@ const columns: QTableProps['columns'] = [
   {
     name: 'delete',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
   {
     name: 'adicionarUnidade',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
   {
     name: 'expand',
     label: '',
-    align: 'left',
+    align: 'center',
     field: ''
   },
 ]
