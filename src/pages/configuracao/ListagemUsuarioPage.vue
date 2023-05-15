@@ -2,7 +2,7 @@
   <q-page padding class="container q-gutter-y-md">
     <div class="row justify-between">
       <span class="text-bold text-primary estoque-h1">
-        Cadastro de usuarios
+        Usuarios
       </span>
 
       <q-btn

@@ -2,7 +2,7 @@
   <q-page padding class="container q-gutter-y-md">
     <div class="row justify-between">
       <span class="text-bold text-primary estoque-h1">
-        Cadastro de produtos
+        Produtos
       </span>
 
       <q-btn
@@ -59,8 +59,8 @@ const loading = ref(false)
 const filteredProdutos = computed(() => {
   return produtos.value?.filter((produto: Produto) => {
     if(!textFilter.value) return produto
-    return produto.nome.includes(textFilter.value) ||
-           produto.descricao.includes(textFilter.value)
+    return produto.nome.toLowerCase().includes(textFilter.value.toLowerCase()) ||
+           produto.descricao.toLowerCase().includes(textFilter.value.toLowerCase())
   })
 })
 

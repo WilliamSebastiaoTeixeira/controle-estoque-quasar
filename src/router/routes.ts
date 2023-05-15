@@ -46,7 +46,11 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'registro/entrada',
-        component: () => import('src/pages/registro/SolicitarRegistroPage.vue')
+        component: () => import('src/pages/registro/RegistroEntradaPage.vue')
+      },
+      {
+        path: 'registro/saida',
+        component: () => import('src/pages/registro/RegistroSaidaPage.vue')
       },
       {
         path: 'produto',

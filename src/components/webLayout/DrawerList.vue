@@ -25,7 +25,6 @@
           class="fit"
         >
           <q-item
-            v-if="!children.disabled"
             clickable
             active-class="text-grey-1 bg-secondary"
             :to="children.route"
@@ -97,7 +96,7 @@ const menu: Father[] = [
     children: []
   },
   {
-    nome: 'Entrada e saída',
+    nome: 'Registros',
     icon: 'las la-warehouse',
     uri: '',
     route: '',
@@ -105,7 +104,7 @@ const menu: Father[] = [
     requiredPermission: [],
     children: [
       {
-        nome: 'Dashboard de registros',
+        nome: 'Dashboard',
         icon: 'dashboard',
         uri: '',
         route: '/app/registro/dashboard',
@@ -113,10 +112,18 @@ const menu: Father[] = [
         disabled: false,
       },
       {
-        nome: 'Registrar entrada',
-        icon: 'input',
+        nome: 'Entrada',
+        icon: 'fas fa-plus-circle',
         uri: '',
         route: '/app/registro/entrada',
+        requiredPermission: ['ENTRADA_SAIDA'],
+        disabled: false,
+      },
+      {
+        nome: 'Saída',
+        icon: 'fas fa-minus-circle',
+        uri: '',
+        route: '/app/registro/saida',
         requiredPermission: ['ENTRADA_SAIDA'],
         disabled: false,
       },

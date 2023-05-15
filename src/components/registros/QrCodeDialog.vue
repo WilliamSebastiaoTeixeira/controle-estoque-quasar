@@ -142,7 +142,7 @@ async function onDecode(_id: string){
   if(jaExistente) {
     $q.notify({
       message: 'Produto já inserido na listagem!',
-      icon: 'fas fa-check-circle',
+      icon: 'fas fa-times-circle',
       color: 'negative',
       timeout: 1200,
     })

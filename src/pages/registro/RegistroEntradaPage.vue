@@ -3,7 +3,7 @@
 
     <div class="row justify-between">
       <span class="text-bold text-primary estoque-h1">
-        Registrar entrada
+        Registrar entrada de produtos
       </span>
     </div>
 
@@ -14,19 +14,20 @@
             <div class="row q-gutter-x-sm no-wrap">
               <input-search-produtos
                 v-model="produtosSelecionados"
+                :entrada="true"
               />
             </div>
           </div>
         </q-card-section>
 
         <q-card-section
-          style="height: 400px;"
+          style="min-height: 400px;"
           class="scroll"
         >
           <div
             v-if="produtosSelecionados.length === 0"
             class="column items-center justify-center q-gutter-x-sm no-wrap"
-            style="height: 100%; width: 100%"
+            style="height: 400px; width: 100%"
           >
             <span
               class="q-gutter-x-sm text-grey-9"
@@ -86,9 +87,11 @@
                       unelevated
                       round
                       flat
-                      color="blue-8"
-                      :icon="props.expand ? 'las la-angle-up' : 'las la-angle-down'"
-                      @click="props.expand = !props.expand"
+                      color="grey-7"
+                      :class="props.expand ? 'rotate-180': ''"
+                      style="transition: transform 0.3s;"
+                      icon="keyboard_arrow_down"
+                      @click.stop="props.expand = !props.expand"
                     />
                   </div>
 
@@ -226,9 +229,9 @@
             </q-btn>
           </div>
         </q-card-section>
-     </q-card>
-   </div>
- </q-page>
+      </q-card>
+    </div>
+  </q-page>
 </template>
 <script setup lang="ts">
 import { ref, computed } from 'vue'

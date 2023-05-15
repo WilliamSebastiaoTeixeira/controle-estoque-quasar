@@ -68,7 +68,17 @@ import type { Produto } from '../../services/ProdutosService'
 const $q = useQuasar()
 const services = useServices()
 
-const props = defineProps(['modelValue'])
+const props = defineProps({
+  modelValue: {
+    type: Array as any,
+    default: () => [],
+  },
+
+  entrada: {
+    type: Boolean,
+    required: true
+  }
+})
 const emit = defineEmits(['update:modelValue'])
 
 const produtos = ref<Produto[]>([])
@@ -81,6 +91,11 @@ function setQrCodeDialog(){
 
     const data = produtosQrCode.map((produto: Produto) => {
       const jaExistente = props.modelValue.some((p: Produto) => produto._id === p._id)
+
+      if(!props.entrada && !produto.qtdUnidades){
+        return undefined
+      }
+
       if(jaExistente) {
         return undefined
       }
@@ -120,6 +135,18 @@ async function onSearch(val: string, update: (callbackFn: () => void) => void, a
 }
 
 function selectProduto(produto: Produto){
+
+  if(!props.entrada && !produto.qtdUnidades){
+    $q.notify({
+      message: 'Produto não possui unidades cadastradas no sistema!',
+      icon: 'fas fa-times-circle',
+      color: 'negative',
+      timeout: 1200,
+    })
+
+    return
+  }
+
   const data = {
     ...produto,
     unidades: [
@@ -131,10 +158,11 @@ function selectProduto(produto: Produto){
   }
 
   const jaExistente = props.modelValue.some((p: Produto) => produto._id === p._id)
+
   if(jaExistente) {
     $q.notify({
       message: 'Produto já inserido na listagem!',
-      icon: 'fas fa-check-circle',
+      icon: 'fas fa-times-circle',
       color: 'negative',
       timeout: 1200,
     })
