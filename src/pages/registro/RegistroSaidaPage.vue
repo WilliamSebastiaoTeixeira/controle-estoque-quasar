@@ -144,7 +144,8 @@
                       style="width: 100%"
                     >
                       <q-table
-                        style="width:100%"
+                        style="width:100%; max-height: 250px;"
+                        :pagination="pagination"
                         flat
                         wrap-cells
                         :columns="columnsUnidades"
@@ -153,6 +154,7 @@
                         selection="multiple"
                         v-model:selected="props.row.selected"
                         hide-bottom
+                        virtual-scroll
                       />
                     </div>
                   </div>
@@ -265,7 +267,14 @@ const $q = useQuasar()
 const loading = ref(false)
 const produtosSelecionados = ref<ProdutoLocal[]>([])
 
-const disable = computed(() => !produtosSelecionados.value.length)
+const disable = computed(() => {
+  const data = produtosSelecionados.value?.filter((produto)=> {
+    return produto.selected && produto.selected.length
+  })
+
+  if(data.length === 0) return true
+  return (data.length < produtosSelecionados.value.length)
+})
 
 function formatDate(date: string){
   if(!date) return

@@ -102,37 +102,36 @@
               class="row justify-start items-center q-ma-sm"
               style="width: 100%"
             >
-              <q-chip
-                v-for="(unidade, indexUnid) in props.row.unidades"
-                :key="indexUnid"
-                class="text-grey-9"
-              >
-                <span>
-                  {{ props.row.nome }}
-                </span>
-
-                <span v-if="unidade.descricao">
-                  : {{ unidade.descricao }}
-                </span>
-
-                <q-btn
-                  v-if="unidade.dataValidade"
-                  flat
-                  dense
-                  size="sm"
-                  unelevated
-                  icon="las la-calendar"
-                  :label="formatDate(unidade.dataValidade)"
+              <div v-if="props.row.unidades && props.row.unidades.length">
+                <q-chip
+                  v-for="(unidade, indexUnid) in props.row.unidades"
+                  :key="indexUnid"
+                  class="text-grey-9"
                 >
-                  <q-tooltip
-                    delay="500"
-                    transition-show="scale"
-                    transition-hide="scale"
+                  <span>
+                    {{ !unidade.descricao ? `${indexUnid + 1}` : `${indexUnid + 1} | ${unidade.descricao}`}}
+                  </span>
+
+                  <q-btn
+                    v-if="unidade.dataValidade"
+                    class="q-ml-sm"
+                    flat
+                    dense
+                    size="sm"
+                    unelevated
+                    icon="las la-calendar"
+                    :label="formatDate(unidade.dataValidade)"
                   >
-                    Validade
-                  </q-tooltip>
-                </q-btn>
-              </q-chip>
+                    <q-tooltip
+                      delay="500"
+                      transition-show="scale"
+                      transition-hide="scale"
+                    >
+                      Validade
+                    </q-tooltip>
+                  </q-btn>
+                </q-chip>
+              </div>
 
               <!--
               <q-table
@@ -148,7 +147,7 @@
               -->
 
               <div
-                v-if="!props.row.unidades"
+                v-else
                 class="column justify-center items-center"
                 style="width: 100%"
               >

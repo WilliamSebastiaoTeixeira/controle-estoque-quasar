@@ -91,15 +91,12 @@
               class="text-grey-9"
             >
               <span>
-                {{ produto.nome }}
-              </span>
-
-              <span v-if="unidade.descricao">
-                : {{ unidade.descricao }}
+                {{ !unidade.descricao ? `${produto.nome}` : `${produto.nome} | ${unidade.descricao}`}}
               </span>
 
               <q-btn
                 v-if="unidade.dataValidade"
+                class="q-ml-sm"
                 flat
                 dense
                 size="sm"
