@@ -1,12 +1,11 @@
 import axios from 'axios'
 import { Notify } from 'quasar'
-import environment from '../environment'
 import { useAuthenticationStore } from '../stores/authentication'
 
 const auth = useAuthenticationStore()
 
 export const http = axios.create({
-  baseURL: environment.apiUrl
+  baseURL: `http://${window.location.hostname}:3000/`
 })
 
 http.defaults.timeout = 300000

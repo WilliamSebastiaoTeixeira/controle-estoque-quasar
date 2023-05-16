@@ -70,7 +70,7 @@ const services = useServices()
 
 const props = defineProps({
   modelValue: {
-    type: Array as any,
+    type: Array as any, // eslint-disable-line
     default: () => [],
   },
 

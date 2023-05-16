@@ -69,7 +69,7 @@ function onEditProduto(produto: Produto){
   setEditarCadastrarProdutoDialog(produto)
 }
 
-async function onLoadUnidades(props: any){
+async function onLoadUnidades(props: any){ // eslint-disable-line
   try{
     props.row.loading = true
     props.row.unidades = await services.registroService.listUnidadesByProduto(props.row._id)

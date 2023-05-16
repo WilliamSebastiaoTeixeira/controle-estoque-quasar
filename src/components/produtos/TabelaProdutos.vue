@@ -272,7 +272,7 @@ defineProps({
 
 const emit = defineEmits(['onEdit', 'onDelete', 'loadUnidades'])
 
-async function loadUnidades(props: any){
+async function loadUnidades(props: any){ // eslint-disable-line
   props.expand = true
   if(props.row.unidades) return
   emit('loadUnidades', props)
