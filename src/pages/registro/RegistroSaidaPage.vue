@@ -1,7 +1,10 @@
 <template>
   <q-page padding class="container q-gutter-y-md">
 
-    <div class="row justify-between">
+    <div
+      class="row"
+      :class="smallWidth ? 'justify-center' : 'justify-between'"
+    >
       <span class="text-bold text-primary estoque-h1">
         Registrar saída de produtos
       </span>
@@ -30,7 +33,7 @@
             style="height: 400px; width: 100%"
           >
             <span
-              class="q-gutter-x-sm text-grey-9"
+              class="q-gutter-x-sm text-grey-9 no-wrap"
               style="font-size: 20px;"
             >
               Nenhum produto selecionado!
@@ -266,6 +269,8 @@ const $q = useQuasar()
 
 const loading = ref(false)
 const produtosSelecionados = ref<ProdutoLocal[]>([])
+
+const smallWidth = computed(() => $q.screen.width < 585 ? true : false)
 
 const disable = computed(() => {
   const data = produtosSelecionados.value?.filter((produto)=> {

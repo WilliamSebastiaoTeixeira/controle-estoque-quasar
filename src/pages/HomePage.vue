@@ -21,22 +21,16 @@
 
   const modulos = [
   {
-    title: 'Entrada e saída',
-    icon: 'las la-warehouse',
+    title: 'Entrada',
+    icon: 'las la-plus-circle',
     available: true,
-    route: '/app/registro',
+    route: '/app/registro/entrada'
   },
   {
-    title: 'Produtos',
-    icon: 'las la-box',
+    title: 'Saida',
+    icon: 'las la-minus-circle',
     available: true,
-    route: '/app/produto',
-  },
-  {
-    title: 'Configuração',
-    icon: 'las la-cog',
-    available: true,
-    route: '/app/configuracao',
+    route: '/app/registro/saida'
   },
 ]
 

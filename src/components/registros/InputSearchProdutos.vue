@@ -27,7 +27,7 @@
         size="10px"
         color="blue-8"
         icon="qr_code_scanner"
-        @click="setQrCodeDialog"
+        @click.stop="setQrCodeDialog"
       />
     </template>
     <template #no-option>

@@ -31,7 +31,6 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-
 const menu = [
   {
     nome: 'Home',
@@ -40,22 +39,12 @@ const menu = [
     route: '/home',
     size: '15px',
     disabled: false
-  },
-  {
-    nome: 'Entrada e saída',
-    icon: 'las la-warehouse',
-    uri: '',
-    route: '/app/registro',
-    size: '17px',
-    disabled: false
-  },
-  {
-    nome: 'Configuração',
-    icon: 'las la-cog',
-    uri: '',
-    route: '/app/configuracao',
-    size: '15px',
-    disabled: false
-  },
+  }
 ]
 </script>
+
+<style scoped>
+.q-layout-padding {
+  padding: 5px;
+}
+</style>
