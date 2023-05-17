@@ -37,7 +37,11 @@
         >
           <div class="column justify-between">
             <div class="col q-pb-md">
-              <QrStream @decode="onDecode" style="border-radius: 4px; overflow: hidden;"></QrStream>
+              <StreamBarcodeReader
+                style="border-radius: 4px; overflow: hidden;"
+                @decode="onDecode"
+              />
+              <!--<QrStream @decode="onDecode" style="border-radius: 4px; overflow: hidden;"></QrStream>-->
             </div>
             <div class="col q-gutter-y-sm scroll" style="max-height: 200px;">
               <q-card
@@ -114,6 +118,8 @@ import { useQuasar } from 'quasar'
 //@ts-ignore
 import { QrStream } from 'vue3-qr-reader'
 /* eslint-enable */
+
+import { StreamBarcodeReader } from "vue-barcode-reader";
 
 import { useServices } from '../../composables/useServices'
 
