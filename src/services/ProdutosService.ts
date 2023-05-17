@@ -5,6 +5,7 @@ export interface Produto {
   nome: string
   qtdUnidades: number
   descricao: string
+  subModulo?: string
 }
 
 export interface Message {
@@ -12,12 +13,24 @@ export interface Message {
 }
 
 export default class ProdutosService {
-  async listProdutos(): Promise<Produto[]> {
+  async listProdutos(subModulo?: string): Promise<Produto[]> {
+
+    if (subModulo) {
+      const { data } = await http.get('/produtos/list', { params: { subModulo: subModulo } })
+      return data
+    }
+
     const { data } = await http.get('/produtos/list')
     return data
   }
 
   async createProduto(produto: Produto): Promise<Message> {
+
+    if (produto.subModulo) {
+      const { data } = await http.post('/produtos/create', { params: { subModulo: produto.subModulo }, ...produto })
+      return data
+    }
+
     const { data } = await http.post('/produtos/create', { ...produto })
     return data
   }

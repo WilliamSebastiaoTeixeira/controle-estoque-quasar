@@ -133,10 +133,27 @@ const menu: Father[] = [
     nome: 'Produtos',
     icon: 'las la-box',
     uri: '',
-    route: '/app/produto',
+    route: '',
     disabled: false,
-    requiredPermission: ['PRODUTOS'],
-    children: []
+    requiredPermission: [],
+    children: [
+      {
+        nome: 'APH',
+        icon: 'las la-medkit',
+        uri: '',
+        route: '/app/produto/aph',
+        requiredPermission: ['APH'],
+        disabled: false,
+      },
+      {
+        nome: 'Limpeza',
+        icon: 'cleaning_services',
+        uri: '',
+        route: '/app/produto/limpeza',
+        requiredPermission: ['LIMPEZA'],
+        disabled: false,
+      },
+    ]
   },
   {
     nome: 'Configuração',

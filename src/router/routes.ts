@@ -1,5 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 import { ConfiguracaoRoutes } from './ConfiguracaoRoutes'
+import { ProdutosRoutes } from './ProdutosRoutes'
+import { DashboardRoutes } from './DashboardRoutes'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -40,22 +42,8 @@ const routes: RouteRecordRaw[] = [
         path: '',
         redirect: '/app/registro/dashboard'
       },
-      {
-        path: 'registro/dashboard',
-        component: () => import('src/pages/registro/DashboardRegistroPage.vue')
-      },
-      {
-        path: 'registro/entrada',
-        component: () => import('src/pages/registro/RegistroEntradaPage.vue')
-      },
-      {
-        path: 'registro/saida',
-        component: () => import('src/pages/registro/RegistroSaidaPage.vue')
-      },
-      {
-        path: 'produto',
-        component: () => import('src/pages/produto/ListagemProdutosPage.vue')
-      },
+      ...DashboardRoutes,
+      ...ProdutosRoutes,
       ...ConfiguracaoRoutes
     ]
   },

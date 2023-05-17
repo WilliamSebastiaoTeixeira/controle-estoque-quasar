@@ -16,7 +16,7 @@
               <span
                 class="text-h6 text-bold text-grey-9"
               >
-                {{ `${ produto ? 'Editar' : 'Novo' } produto`}}
+                {{ `${ produto ? 'Editar' : 'Novo' } ${labelHeader}`}}
               </span>
             </div>
             <q-btn
@@ -100,6 +100,7 @@ import { useDialogPluginComponent } from 'quasar'
 import useVuelidate from '@vuelidate/core'
 import { useQuasar } from 'quasar'
 import { required } from '@vuelidate/validators'
+import { capitalize  } from 'lodash'
 
 import { useServices } from '../../composables/useServices'
 import { Produto } from './../../services/ProdutosService'
@@ -109,6 +110,14 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  labelHeader: {
+    type: String,
+    default: () => 'produto'
+  },
+  subModulo: {
+    type: String,
+    default: () => undefined
+  }
 })
 
 defineEmits(useDialogPluginComponent.emits)
@@ -122,6 +131,7 @@ const form: Produto = reactive({
   nome: '',
   qtdUnidades: 0,
   descricao: '',
+  subModulo: props.subModulo
 })
 
 const rules = computed(() => ({
@@ -136,17 +146,17 @@ async function save() {
   try {
     loading.value = true
     if (props.produto) {
-      const data = await services.produtosService.updateProduto(form)
+      await services.produtosService.updateProduto(form)
       $q.notify({
-        message: data.message,
+        message: `${capitalize(props.labelHeader)} atualizado com sucesso!`,
         icon: 'fas fa-check-circle',
         color: 'positive',
         timeout: 1200,
       })
     } else {
-      const data = await services.produtosService.createProduto(form)
+      await services.produtosService.createProduto(form)
       $q.notify({
-        message: data.message,
+        message: `${capitalize(props.labelHeader)} criado com sucesso!`,
         icon: 'fas fa-check-circle',
         color: 'positive',
         timeout: 1200,
