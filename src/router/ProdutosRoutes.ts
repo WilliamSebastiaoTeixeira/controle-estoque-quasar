@@ -21,4 +21,8 @@ export const ProdutosRoutes: RouteRecordRaw[] = [
     path: 'produto/provisoes',
     component: () => import('src/pages/produto/ListagemProdutosProvisoesPage.vue')
   },
+  {
+    path: 'produto/uniformes',
+    component: () => import('src/pages/produto/ListagemProdutosUniformePage.vue')
+  },
 ]

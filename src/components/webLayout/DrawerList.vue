@@ -170,6 +170,14 @@ const menu: Father[] = [
         disabled: false,
       },
       {
+        nome: 'Uniformes',
+        icon: 'las la-tshirt',
+        uri: '',
+        route: '/app/produto/uniformes',
+        requiredPermission: ['UNIFORME'],
+        disabled: false,
+      },
+      {
         nome: 'Diversos',
         icon: 'help_center',
         uri: '',
