@@ -4,7 +4,7 @@
 
       <div class="row items-center q-gutter-x-md text-bold text-primary estoque-h1">
         <span>
-          APH
+          Provisões
         </span>
       </div>
 
@@ -22,7 +22,7 @@
         v-model="textFilter"
         outlined
         dense
-        placeholder="Pesquise pelo material..."
+        placeholder="Pesquise pela provisão..."
       >
         <template v-slot:prepend>
           <q-icon name="las la-search" />
@@ -87,8 +87,8 @@ function setEditarCadastrarProdutoDialog(produto: Produto | null) {
     component: EditarCadastrarProdutoDialog,
     componentProps: {
       produto: produto,
-      subModulo: 'APH',
-      labelHeader: 'material de APH'
+      subModulo: 'PROVISOES',
+      labelHeader: 'provisão'
     },
   }).onOk(()=>{
     load()
@@ -125,7 +125,7 @@ async function onDeleteProduto(_id: string){
 async function load(){
   try {
     loading.value = true
-    const data = await services.produtosService.listProdutos('APH')
+    const data = await services.produtosService.listProdutos('PROVISOES')
     produtos.value = data
   }finally{
     loading.value = false

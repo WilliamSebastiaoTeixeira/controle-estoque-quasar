@@ -16,7 +16,7 @@
               <span
                 class="text-h6 text-bold text-grey-9"
               >
-                {{ `${ produto ? 'Editar' : 'Novo' } ${labelHeader}`}}
+                {{ `${ produto ? 'Editar' : 'Novo(a)' } ${labelHeader}`}}
               </span>
             </div>
             <q-btn

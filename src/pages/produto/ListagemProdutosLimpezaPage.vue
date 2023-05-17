@@ -3,9 +3,8 @@
     <div class="row justify-between">
 
       <div class="row items-center q-gutter-x-md text-bold text-primary estoque-h1">
-        <q-icon name="cleaning_services"/>
         <span>
-          Materiais de Limpeza
+          Limpeza
         </span>
       </div>
 
@@ -13,7 +12,7 @@
         color="secondary"
         unelevated
         no-caps
-        label="Novo material"
+        label="Cadastrar"
         @click="setEditarCadastrarProdutoDialog(null)"
       />
     </div>

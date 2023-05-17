@@ -9,4 +9,16 @@ export const ProdutosRoutes: RouteRecordRaw[] = [
     path: 'produto/limpeza',
     component: () => import('src/pages/produto/ListagemProdutosLimpezaPage.vue')
   },
+  {
+    path: 'produto/diversos',
+    component: () => import('src/pages/produto/ListagemProdutosDiversosPage.vue')
+  },
+  {
+    path: 'produto/aquatico',
+    component: () => import('src/pages/produto/ListagemProdutosAquaticoPage.vue')
+  },
+  {
+    path: 'produto/provisoes',
+    component: () => import('src/pages/produto/ListagemProdutosProvisoesPage.vue')
+  },
 ]

@@ -9,7 +9,7 @@
         color="secondary"
         unelevated
         no-caps
-        label="Novo produto"
+        label="Cadastrar"
         @click="setEditarCadastrarProdutoDialog(null)"
       />
     </div>
